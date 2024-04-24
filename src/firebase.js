@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 import { renderPatientData } from "./ui";
 
 const firebaseConfig = {
@@ -38,7 +38,7 @@ const updateTimestamp = function updateTimestampWithDataObject(
   timestampId,
   data
 ) {
-  return set(ref(database, `patients/${patientId}/data/${timestampId}`), data);
+  return update(ref(database, `patients/${patientId}/data/${timestampId}`), data);
 };
 
 export { getPatientData, updateTimestamp };
