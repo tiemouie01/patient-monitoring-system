@@ -30,4 +30,9 @@ const renderTimestampHistory = (timestampData) => {
   };
 };
 
-export { renderPatientInfo, renderTimestampHistory };
+const renderPatientData = (data) => {
+  renderPatientInfo(data);
+  renderTimestampHistory(data.data);
+}
+
+export { renderPatientInfo, renderTimestampHistory, renderPatientData };

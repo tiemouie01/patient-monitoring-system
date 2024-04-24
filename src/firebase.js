@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onValue } from "firebase/database";
+import { renderPatientData } from "./ui";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLYYbHcEz1s22WrjtokUFgr0f42kqyGPo",
@@ -17,11 +18,19 @@ const database = getDatabase();
 
 const getPatientData = function getPatientDataFromDatabase(patientId) {
   const patientDataRef = ref(database, `patients/${patientId}`);
+  
+  // Additionally, listen for data changes and update UI
+  onValue(patientDataRef, (snapshot) => {
+    const data = snapshot.val();
+    renderPatientData(data); // Call a function to update UI
+  });
+
   return new Promise((resolve) => {
     onValue(patientDataRef, (snapshot) => {
       resolve(snapshot.val());
-    })
-  })
+    });
+  });
+
 };
 
 const updateTimestamp = function updateTimestampWithDataObject(
