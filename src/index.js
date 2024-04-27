@@ -1,11 +1,16 @@
-import { getPatientData, updateTimestamp } from "./firebase";
+import { getPatientData } from "./firebase";
 import { renderPatientInfo, renderTimestampHistory } from "./ui";
+import initInteraction from "./interaction";
 
-getPatientData("<patient_id>").then((data) => {
+const patientId = "<patient_id>";
+
+getPatientData(patientId).then((data) => {
   console.log(data);
 
   const patientData = data;
   const timestampHistory = data.data;
   renderPatientInfo(patientData);
   renderTimestampHistory(timestampHistory);
+  initInteraction(patientId);
 });
+
