@@ -10,25 +10,29 @@ const renderPatientInfo = (patientData) => {
 };
 
 const renderTimestampHistory = (timestampData) => {
+  const heartSvg = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#b91c1c"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+  const tempSvg = '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#ea580c"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><path d="M15,13V5c0-1.66-1.34-3-3-3S9,3.34,9,5v8c-1.21,0.91-2,2.37-2,4c0,2.76,2.24,5,5,5s5-2.24,5-5C17,15.37,16.21,13.91,15,13z M11,11V5c0-0.55,0.45-1,1-1s1,0.45,1,1v1h-1v1h1v1v1h-1v1h1v1H11z"/></g></svg>'
+
   const container = document.getElementById("timestamp-history");
   container.innerHTML = '<h1 class="text-3xl font-bold">Timestamp History<h1>';
   for (const timestampId in timestampData) {
     const timestamp = timestampData[timestampId]; // Access data using key
 
+    const bgColor = timestamp.alert ? "bg-red-500" : "bg-sky-200";
+    
     const timestampElement = document.createElement("div");
-    timestampElement.className = "timestamp";
+    timestampElement.className = `timestamp rounded-xl shadow-lg p-4 space-y-2 ${bgColor}`; 
     timestampElement.innerHTML = `
-      <p>Time: ${new Date(timestampId).toLocaleString()}</p>
-      <p>Heart Rate: ${timestamp.heartRate} BPM</p>
-      <p>Temperature: ${timestamp.temperature}°C</p>
-      <p>Ward: <input type="text" value="${
+      <p class="text-xl font-semibold">${new Date(timestampId).toLocaleString()}</p>
+      <p class="flex">${heartSvg} ${timestamp.heartRate} BPM</p>
+      <p class="flex">${tempSvg} ${timestamp.temperature}°C</p>
+      <p><input type="text" value="${
         timestamp.ward || ""
-      }" data-timestamp-id="${timestampId}"></p>
-      <p>Alert: ${timestamp.alert ? "Yes" : "No"}</p>
-      <textarea data-timestamp-id="${timestampId}" placeholder="Notes">${
+      }" data-timestamp-id="${timestampId}" class="${bgColor}"></p>
+      <textarea data-timestamp-id="${timestampId}" class="w-full ${bgColor}" placeholder="Notes">${
         timestamp.notes || ""
       }</textarea>
-      <button data-timestamp-id="${timestampId}">Save</button>
+      <button data-timestamp-id="${timestampId}" class="m-auto hover:text-white font-bold flex justify-center">Save</button>
     `;
     container.appendChild(timestampElement);
   }
