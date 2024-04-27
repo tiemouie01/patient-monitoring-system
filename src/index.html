@@ -1,14 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patient Monitoring System</title>
-</head>
-<body>
-    <main class="grid grid-cols-2 gap-4">
-        <section id="patient-info"></section>
-        <section id="timestamp-history" class="col-start-2"></section>
+  </head>
+  <body class="grid grid-cols-5 h-dvh">
+    <nav class="bg-sky-200 p-4">
+      <h1 class="text-5xl text-center">PMS</h1>
+      <p class="mt-1 text-xs text-center font-bold">
+        Patient Montioring System
+      </p>
+      <ul class="mt-6 text-xl space-y-2">
+        <li>
+          <a href="#" class="hover:text-white">Home</a>
+        </li>
+        <li class="border-l-4 border-black pl-3">
+          <a href="#" class="hover:text-white">Patients</a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="col-start-2 col-span-4 grid grid-cols-3 grid-rows-4 p-4 bg-sky-50">
+      <section id="patient-info" class="p-4"></section>
+      <section id="graphs" class="row-start-2 col-span-3"></section>
+      <section
+        id="timestamp-history"
+        class="p-4 rounded-xl shadow-lg col-start-3 row-start-1 row-span-4 bg-white"
+      ></section>
     </main>
-</body>
+
+  </body>
 </html>
