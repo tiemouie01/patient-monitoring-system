@@ -18,7 +18,7 @@ const database = getDatabase();
 
 const getPatientData = function getPatientDataFromDatabase(patientId) {
   const patientDataRef = ref(database, `patients/${patientId}`);
-  
+
   // Additionally, listen for data changes and update UI
   onValue(patientDataRef, (snapshot) => {
     const data = snapshot.val();
@@ -30,7 +30,6 @@ const getPatientData = function getPatientDataFromDatabase(patientId) {
       resolve(snapshot.val());
     });
   });
-
 };
 
 const updateTimestamp = function updateTimestampWithDataObject(
