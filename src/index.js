@@ -1,6 +1,7 @@
 import { getPatientData } from "./firebase";
 import { renderPatientInfo, renderTimestampHistory } from "./ui";
 import initInteraction from "./interaction";
+import "./output.css"
 
 const patientId = "<patient_id>";
 
