@@ -1,5 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
+import { Chart } from "chart.js/auto";
+
 const renderPatientInfo = (patientData) => {
   const container = document.getElementById("patient-info");
   container.innerHTML = `
@@ -9,6 +11,71 @@ const renderPatientInfo = (patientData) => {
     <p class="text-xl">Age: ${patientData.demographics.age || "N/A"}</p>
     <p class="text-xl">Gender: ${patientData.demographics.gender || "N/A"}</p>
     `;
+};
+
+let myChart;
+
+const renderGraph = (timestampData) => {
+  const heartRates = [];
+  const temperatures = [];
+  const times = [];
+
+  for (const timestampId in timestampData) {
+    heartRates.push(timestampData[timestampId].heartRate);
+    temperatures.push(timestampData[timestampId].temperature);
+    times.push(new Date(timestampId).toLocaleString());
+  }
+
+  const ctx = document.getElementById("graphs").getContext("2d");
+
+  // If a chart already exists, destroy it and nullify the variable
+  if (myChart) {
+    myChart.destroy();
+    myChart = null;
+  }
+
+  // Create a new Chart instance
+  myChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: times,
+      datasets: [
+        {
+          label: "Heart Rate (BPM)",
+          data: heartRates,
+          borderColor: "rgb(185, 28, 28)",
+          backgroundColor: "rgba(185, 28, 28, 0.5)",
+          fill: false,
+        },
+        {
+          label: "Temperature (°C)",
+          data: temperatures,
+          borderColor: "rgb(234, 88, 12)",
+          backgroundColor: "rgba(234, 88, 12, 0.5)",
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: "Time",
+          },
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: "Value",
+          },
+        },
+      },
+    },
+  });
 };
 
 const renderTimestampHistory = (timestampData) => {
@@ -43,6 +110,7 @@ const renderTimestampHistory = (timestampData) => {
     `;
     container.appendChild(timestampElement);
   }
+  renderGraph(timestampData);
 };
 
 const renderPatientData = (data) => {
