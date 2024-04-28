@@ -98,7 +98,7 @@ const renderTimestampHistory = (timestampData) => {
 
     const bgColor = timestampValues.alert ? "bg-red-500" : "bg-sky-200";  
 
-    const timestampElement = document.createElement("div");
+    const timestampElement = document.createElement("article");
     timestampElement.className = `timestamp rounded-xl shadow-lg p-4 space-y-2 ${bgColor}`;
     timestampElement.innerHTML = `
       <p class="text-xl font-semibold">${new Date(
