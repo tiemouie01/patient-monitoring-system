@@ -15,6 +15,8 @@ The `initInteraction` function from the `interaction.js` file is used to initial
 Timothy Miamba- timal0361@gmail.com
 
 Project Link: [https://github.com/tiemouie01/health-dashboard](https://github.com/tiemouie01/health-dashboard)
+Live Preview: [https://timmy-pms.netlify.app/](https://timmy-pms.netlify.app/)
+
 
 ## Acknowledgements
 
