@@ -111,7 +111,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "start": "webpack serve --open",
     "styles": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
